@@ -1,4 +1,5 @@
 {% extends "blog/base.html" %}
+{% load blog_tags %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
@@ -19,6 +20,10 @@
     {% empty %}
         There are no similar posts yet.
     {% endfor %}
+    <hr>
+    <div class="back">
+        <a href="{% url 'blog:post_list' %}">Volver al inicio</a>
+    </div>
     {% with comments.count as total_comments %}
         <h2>
         {{ total_comments }} comment{{ total_comments|pluralize }}

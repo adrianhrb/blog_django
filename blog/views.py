@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Count
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
@@ -20,7 +21,7 @@ from blog.models import Post
 #     template_name = 'blog/post/list.html'
 
 
-def post_list(request, tag_slug=None):
+def post_list(request: HttpRequest, tag_slug: str = None) -> HttpResponse:
     """This view display all the published posts on the blog"""
     post_list = Post.published.all()
     tag = None
