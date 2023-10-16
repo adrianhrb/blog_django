@@ -4,7 +4,8 @@ Making my first project on django
 <img width = 45% src = "img/blog.jpeg">
 </div>
 
-This repo is dedicated to develop our first project on Django. We are going to build a blog following the instructions on [Django 4 by example](https://www.amazon.com/Django-Example-powerful-reliable-applications/dp/1801813051), book made by Antonio Melé. You cand find him in: [Linkedin](https://www.linkedin.com/in/amele/) or [Github](https://github.com/zenx). This blog app is part of first unit in our second year of web aplication development grade.  
+This repo is dedicated to develop our first project on Django. We are going to build a blog following the instructions on [Django 4 by example](https://www.amazon.com/Django-Example-powerful-reliable-applications/dp/1801813051), book made by Antonio Melé. You cand find him in: [Linkedin](https://www.linkedin.com/in/amele/) or [Github](https://github.com/zenx).  
+This blog app is part of first unit in our second year of web aplication development grade.  
 
 ## Setup
 We will use Python virtual enviroments to install the [requirements](./requirements.txt)
