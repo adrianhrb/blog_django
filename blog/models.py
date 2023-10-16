@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.query import QuerySet
 from django.urls import reverse
 from django.utils import timezone
+from taggit.managers import TaggableManager
 
 
 # Manager to filter only published Posts
@@ -29,6 +30,7 @@ class Post(models.Model):
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
     objects = models.Manager()  # Default manager
     published = PublishedManager()  # Our custom manager
+    tags = TaggableManager()
 
     class Meta:
         """Defines metadata for the model with some attributes"""
