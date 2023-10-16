@@ -13,7 +13,7 @@ $ python -m venv .venv --prompt mysite
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
-We are going to implement some functionalities to send mails, a `.env` file will be required to keep save some data as passwords or personal mails. It will be used also to some database configuration
+To implement some functionalities to send mails, a `.env` file will be required to keep save some data as passwords or personal mails. It will be used also to some database configuration
 
 
 ### Extra files
