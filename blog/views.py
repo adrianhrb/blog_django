@@ -37,10 +37,10 @@ def post_list(request: HttpRequest, tag_slug: str = None) -> HttpResponse:
         posts = paginator.page(paginator.num_pages)
     except PageNotAnInteger:
         posts = paginator.page(1)
-    return render(request, 'blog/post/list.html', {'posts': posts, 'tag': tag})
+    return render(request, 'blog/post/list.html', dict(posts=posts, tag=tag))
 
 
-def post_detail(request, year: int, month: int, day: int, post: Post):
+def post_detail(request: HttpRequest, year: int, month: int, day: int, post: Post) -> HttpResponse:
     """This function display a the single post that is requested by the user"""
     post = get_object_or_404(
         Post,
@@ -62,11 +62,11 @@ def post_detail(request, year: int, month: int, day: int, post: Post):
     return render(
         request,
         'blog/post/detail.html',
-        {'post': post, 'comments': comments, 'form': form, 'similar_posts': similar_posts},
+        dict(post=post, comments=comments, form=form, similar_posts=similar_posts),
     )
 
 
-def post_share(request, post_id: int):
+def post_share(request: HttpRequest, post_id: int) -> HttpResponse:
     # Retrieve post by id
     post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
     sent = False
@@ -86,11 +86,11 @@ def post_share(request, post_id: int):
     else:
         form = EmailPostForm()
 
-    return render(request, 'blog/post/share.html', {'post': post, 'form': form, 'sent': sent})
+    return render(request, 'blog/post/share.html', dict(post=post, form=form, sent=sent))
 
 
 @require_POST
-def post_comment(request, post_id: int):
+def post_comment(request: HttpRequest, post_id: int) -> HttpResponse:
     post = get_object_or_404(Post, id=post_id, status=Post.Status.PUBLISHED)
     comment = None
     # A comment was posted
@@ -102,6 +102,4 @@ def post_comment(request, post_id: int):
         comment.post = post
         # Save the comment to the database
         comment.save()
-    return render(
-        request, 'blog/post/comment.html', {'post': post, 'form': form, 'comment': comment}
-    )
+    return render(request, 'blog/post/comment.html', dict(post=post, comment=comment, form=form))
