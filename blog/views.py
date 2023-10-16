@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
 
-from blog.forms import CommentForm, EmailPostForm
-from blog.models import Post
+from .forms import CommentForm, EmailPostForm
+from .models import Post
 
 # from django.views.generic import ListView
 
