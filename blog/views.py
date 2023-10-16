@@ -1,3 +1,4 @@
+from django.contrib.postgres.search import TrigramSimilarity
 from django.core.mail import send_mail
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db.models import Count
@@ -6,7 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
 
-from .forms import CommentForm, EmailPostForm
+from .forms import CommentForm, EmailPostForm, SearchForm
 from .models import Post
 
 # from django.views.generic import ListView
@@ -103,3 +104,20 @@ def post_comment(request: HttpRequest, post_id: int) -> HttpResponse:
         # Save the comment to the database
         comment.save()
     return render(request, 'blog/post/comment.html', dict(post=post, comment=comment, form=form))
+
+
+def post_search(request: HttpRequest) -> HttpResponse:
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = (
+                Post.published.annotate(similarity=TrigramSimilarity('title', query))
+                .filter(similarity__gt=0.1)
+                .order_by('-similarity')
+            )
+
+    return render(request, 'blog/post/search.html', dict(form=form, query=query, results=results))
