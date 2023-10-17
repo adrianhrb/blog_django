@@ -1,4 +1,4 @@
-# MY FIRST BLOG MADE WITH DJANGO
+# BLOG WITH DJANGO
 Making my first project on django
 <div align="center">
 <img width = 45% src = "img/blog.jpeg">
